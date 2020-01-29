@@ -1,0 +1,12 @@
+
+
+Linux:
+
+ find / -type d \( -name tmp -o -name boot -o -name opt -o -name var -o -name san -o -name xenv -o -name nas -o -name net -o -name lastlog \)  -prune -o -size +1024k -exec ls -lk '{}' \; 2>/dev/null | awk '{print $5,$9,$3,$4,$6,$7,$8}' | sort -rn | head -25 |  awk '{size=$1/1024/1024; if (size > 1) printf "Size: %3.1fG",size;  else printf "Size: %3.1fM",size * 1024; print  " - Date: " $5 "_" $6 "_" $7  " | File: " $2 "  Owner:group --> " $3":"$4}'
+  
+ find . -size +1024k -exec ls -lk '{}' \; 2>/dev/null | awk '{print $5,$9,$3,$4,$6,$7,$8}' | sort -rn | head -50 |  awk '{size=$1/1024/1024; if (size > 1) printf "Size: %3.1fG",size;  else printf "Size: %3.1fM",size * 1024; print  " - Date: " $5 "_" $6 "_" $7  " | File: " $2 "  Owner:group --> " $3":"$4 }'
+ 
+  
+ AIX: 
+    
+   find . -size +1024k -exec ls -ls '{}' \; 2>/dev/null | awk '{print $6,$10,$4,$5,$7,$8,$9}' | sort -rn | head -50 |  awk '{size=$1/1024/1024/1024; if (size > 1) printf "Size: %3.1fG",size;  else printf "Size: %3.1fM",size * 1024; print  " - Date: " $5 "_" $6 "_" $7  " | File: " $2 "  Owner:group --> " $3":"$4}'

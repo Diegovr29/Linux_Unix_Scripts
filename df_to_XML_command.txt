@@ -1,0 +1,4 @@
+
+Get Filesystems mounted and send data to XML formatted file:
+
+ df -h | egrep -v "/devices|ctfs|proc|mnttab|objfs|sharefs|fd" | awk '{print "<ss:Row><ss:Cell><ss:Data ss:Type=\"String\">"$1"</ss:Data></ss:Cell>" "<ss:Cell><ss:Data ss:Type=\"String\">"$2"</ss:Data></ss:Cell>" "<ss:Cell><ss:Data ss:Type=\"String\">"$3"</ss:Data></ss:Cell>" "<ss:Cell><ss:Data ss:Type=\"String\">"$4"</ss:Data></ss:Cell>"  "<ss:Cell><ss:Data ss:Type=\"String\">"$5"</ss:Data></ss:Cell>" "<ss:Cell><ss:Data ss:Type=\"String\">"$6"</ss:Data></ss:Cell></ss:Row>" }' > /tmp/fstest.txt
